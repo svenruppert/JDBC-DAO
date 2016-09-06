@@ -1,0 +1,1368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.rapidpm</groupId>
+  <artifactId>jdbc-dao-parent</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0.0-SNAPSHOT</version>
+
+
+  <inceptionYear>2013</inceptionYear>
+  <organization>
+    <name>RapidPM</name>
+    <url>http://www.rapidpm.org</url>
+  </organization>
+
+  <url>https://github.com/svenruppert/JDBC-DAO</url>
+  <name>RapidPM JDBC DAO</name>
+  <description>Minimalistic JDBC based DAO for Java SE</description>
+  <scm>
+    <url>https://github.com/svenruppert/JDBC-DAO</url>
+    <connection>scm:git:https://github.com/svenruppert/JDBC-DAO.git</connection>
+    <developerConnection>scm:git:https://github.com/svenruppert/JDBC-DAO.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+  <developers>
+    <developer>
+      <name>Sven Ruppert</name>
+      <email>sven.ruppert@gmail.com</email>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/svenruppert/JDBC-DAO/issues</url>
+  </issueManagement>
+  <!--<ciManagement>-->
+    <!--<system>TeamCity</system>-->
+    <!--<url>https://build.rapidpm.org/project.html?projectId=RapidPM_RapidPMDependencies</url>-->
+  <!--</ciManagement>-->
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+      <comments>A business-friendly OSS license</comments>
+    </license>
+  </licenses>
+
+
+  <properties>
+    <jmh.version>1.12</jmh.version>
+    <kotlin.version>1.0.3</kotlin.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!--<jacoco.version>0.7.5.201505241946</jacoco.version>-->
+    <jacoco.version>0.7.6.201602180812</jacoco.version>
+    <slf4j.version>1.7.21</slf4j.version>
+  </properties>
+
+  <modules>
+    <module>jdbcpool</module>
+    <module>daoimpl</module>
+  </modules>
+
+  <prerequisites>
+    <maven>3.3.0</maven>
+  </prerequisites>
+
+  <dependencyManagement>
+    <!--project versions-->
+    <dependencies>
+      <dependency>
+        <groupId>org.rapidpm</groupId>
+        <artifactId>jdbc-dao-jdbcpool</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm</groupId>
+        <artifactId>jdbc-dao-jdbcpool</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <type>test-jar</type>
+        <scope>test</scope>
+      </dependency>
+      <!--<dependency>-->
+        <!--<groupId>io.dropwizard.metrics</groupId>-->
+        <!--<artifactId>metrics-core</artifactId>-->
+        <!--<version>3.1.2</version>-->
+      <!--</dependency>-->
+      <!--Logging-->
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>2.6.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>2.6.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-1.2-api</artifactId>
+        <version>2.6.2</version>
+      </dependency>
+      <dependency>
+        <groupId>com.zaxxer</groupId>
+        <artifactId>HikariCP</artifactId>
+        <version>2.4.7</version>
+        <scope>compile</scope>
+      </dependency>
+      <!--tdd-->
+
+      <dependency>
+        <!--  must be on the classpath  -->
+        <groupId>org.jacoco</groupId>
+        <artifactId>org.jacoco.agent</artifactId>
+        <classifier>runtime</classifier>
+        <version>${jacoco.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.jacoco</groupId>
+        <artifactId>org.jacoco.ant</artifactId>
+        <version>${jacoco.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.code.findbugs</groupId>
+        <artifactId>jsr305</artifactId>
+        <version>3.0.1</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hsqldb</groupId>
+        <artifactId>hsqldb</artifactId>
+        <version>2.3.4</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest</artifactId>
+        <version>1.1.10</version>
+        <scope>test</scope>
+      </dependency>
+      <!--Microbenchmarking-->
+      <dependency>
+        <groupId>org.openjdk.jmh</groupId>
+        <artifactId>jmh-core</artifactId>
+        <version>${jmh.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.openjdk.jmh</groupId>
+        <artifactId>jmh-core-benchmarks</artifactId>
+        <version>${jmh.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.openjdk.jmh</groupId>
+        <artifactId>jmh-generator-annprocess</artifactId>
+        <version>${jmh.version}</version>
+        <!--<scope>provided</scope>-->
+      </dependency>
+      <dependency>
+        <groupId>org.openjdk.jmh</groupId>
+        <artifactId>jmh-generator-reflection</artifactId>
+        <version>${jmh.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!--Brian Goetz Concurrency Annotations-->
+      <dependency>
+        <groupId>net.jcip</groupId>
+        <artifactId>jcip-annotations</artifactId>
+        <version>1.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+
+  <dependencies>
+
+
+    <dependency>
+      <groupId>org.rapidpm</groupId>
+      <artifactId>rapidpm-dependencies-core</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+
+
+
+    <dependency>
+      <!--TDD-->
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!--Microbenchmarking-->
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-core-benchmarks</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-generator-annprocess</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-generator-reflection</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.jcip</groupId>
+      <artifactId>jcip-annotations</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.5.3</version>
+          <!--<version>3.0-r1585899</version>-->
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.5.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.19.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <!--<version>0.7.5.201505241946</version>-->
+          <version>${jacoco.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-repository-plugin</artifactId>
+          <version>2.4</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>1.6</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.10.4</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>2.17</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>1.4.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jdeps-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>2.4.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>1.10</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>2.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.pitest</groupId>
+          <artifactId>pitest-maven</artifactId>
+          <version>1.1.10</version>
+        </plugin>
+        <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>findbugs-maven-plugin</artifactId>
+          <version>3.0.3</version>
+        </plugin>
+
+      </plugins>
+    </pluginManagement>
+
+
+    <plugins>
+      <!-- Define release properties -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <!--<goal>jar</goal> do not define it here again !!-->
+              <goal>test-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+              <goal>test-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-repository-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>add sources</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/generated-sources/annotations</source>
+                <source>src/main/scala</source>
+                <source>src/main/java</source>
+                <source>src/main/kotlin</source>
+              </sources>
+            </configuration>
+          </execution>
+
+
+          <execution>
+            <id>add generated sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/generated-sources/annotations</source>
+                <source>src/main/scala</source>
+                <source>src/main/java</source>
+                <source>src/main/kotlin</source>
+              </sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>add generated test sources</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/generated-test-sources/test-annotations</source>
+                <source>src/test/scala</source>
+                <source>src/test/java</source>
+                <source>src/test/kotlin</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+
+  <profiles>
+
+    <profile>
+      <id>gen-javadoc</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <destDir>target/doc/apidoc/</destDir>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>qm-qs-findbugs</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <reporting>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>findbugs-maven-plugin</artifactId>
+            <configuration>
+              <onlyAnalyze>org.rapidpm.*</onlyAnalyze>
+              <!--
+                  Enables analysis which takes more memory but finds more bugs.
+                  If you run out of memory, changes the value of the effort element
+                  to 'low'.
+              -->
+              <effort>Max</effort>
+              <!-- Reports all bugs (other values are medium and max) -->
+              <threshold>Low</threshold>
+              <!-- Produces XML report -->
+              <xmlOutput>true</xmlOutput>
+              <!-- Configures the directory in which the XML report is created -->
+              <findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
+              <!--<visitors>FindDeadLocalStores,UnreadFields</visitors>-->
+            </configuration>
+          </plugin>
+        </plugins>
+      </reporting>
+
+    </profile>
+    <profile>
+      <id>qm-qs-pitest</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <!--Enable mutation testing-->
+          <plugin>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-maven</artifactId>
+            <configuration>
+              <outputFormats>
+                <outputFormat>XML</outputFormat>
+                <outputFormat>HTML</outputFormat>
+              </outputFormats>
+              <targetClasses>
+                <param>org.rapidpm.*</param>
+              </targetClasses>
+              <targetTests>
+                <param>*.org.rapidpm.*</param>
+              </targetTests>
+            </configuration>
+          </plugin>
+
+        </plugins>
+      </build>
+      <reporting>
+        <plugins>
+          <plugin>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-maven</artifactId>
+            <reportSets>
+              <reportSet>
+                <reports>
+                  <report>report</report>
+                </reports>
+              </reportSet>
+            </reportSets>
+          </plugin>
+        </plugins>
+      </reporting>
+    </profile>
+
+    <profile>
+      <id>qm-qs-jacoco</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <dependencies>
+        <!--tdd-->
+        <dependency>
+          <!--  must be on the classpath  -->
+          <groupId>org.jacoco</groupId>
+          <artifactId>org.jacoco.agent</artifactId>
+          <classifier>runtime</classifier>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <configuration>
+              <includes>
+                <include>**/org/rapidpm/**/*</include>
+              </includes>
+            </configuration>
+            <executions>
+              <execution>
+                <id>default-instrument</id>
+                <goals>
+                  <goal>instrument</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>default-restore-instrumented-classes</id>
+                <goals>
+                  <goal>restore-instrumented-classes</goal>
+                </goals>
+              </execution>
+              <execution>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>default-report</id>
+                <phase>prepare-package</phase>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>default-check</id>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+                <configuration>
+                  <rules>
+                    <rule>
+                      <element>BUNDLE</element>
+                      <limits>
+                        <limit>
+                          <counter>COMPLEXITY</counter>
+                          <value>COVEREDRATIO</value>
+                          <!--<minimum>0.60</minimum>-->
+                          <minimum>0.00</minimum>
+                        </limit>
+                      </limits>
+                    </rule>
+                    <!--<rule>-->
+                    <!--<element>CLASS</element>-->
+                    <!--<excludes>-->
+                    <!--<exclude>**/junit/**</exclude>-->
+                    <!--</excludes>-->
+                    <!--<limits>-->
+                    <!--<limit>-->
+                    <!--<counter>LINE</counter>-->
+                    <!--<value>COVEREDRATIO</value>-->
+                    <!--<minimum>0.50</minimum>-->
+                    <!--</limit>-->
+                    <!--</limits>-->
+                    <!--</rule>-->
+                  </rules>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <!-- Directory plugin to find parent root directory absolute path -->
+
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>qm-qs-surefire-fork</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <inherited>true</inherited>
+            <configuration>
+              <includes>
+                <include>**/junit/**</include>
+              </includes>
+              <excludes>
+                <exclude>**/*ini/**</exclude>
+                <exclude>**/*txt/**</exclude>
+                <exclude>**/*.jpg</exclude>
+
+              </excludes>
+              <argLine>-Xmx286m -Dsonar.pitest.mode=reuseReport</argLine>
+              <forkCount>2.5C</forkCount>
+              <reuseForks>false</reuseForks>
+
+              <reportFormat>xml</reportFormat>
+              <reportFormat>html</reportFormat>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>qm-qs-jacoco-junit</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <inherited>true</inherited>
+            <configuration>
+              <systemPropertyVariables>
+                <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+              </systemPropertyVariables>
+              <includes>
+                <include>**/junit/**</include>
+              </includes>
+              <excludes>
+                <exclude>**/*ini/**</exclude>
+                <exclude>**/*txt/**</exclude>
+                <exclude>**/*.jpg</exclude>
+
+              </excludes>
+              <argLine>-Xmx286m -Dsonar.pitest.mode=reuseReport</argLine>
+              <forkCount>2.5C</forkCount>
+              <reuseForks>false</reuseForks>
+
+              <reportFormat>xml</reportFormat>
+              <reportFormat>html</reportFormat>
+              <!--<testSourceDirectory>${project.build.directory}/generated-test-sources/test-annotations</testSourceDirectory>-->
+              <!--<classesDirectory>target/generated-classes/emma/classes</classesDirectory>-->
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>sys-nexus-deploy</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <distributionManagement>
+        <repository>
+          <id>sonatype-nexus-snapshots</id>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+        <snapshotRepository>
+          <id>sonatype-nexus-snapshots</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+      </distributionManagement>
+    </profile>
+
+    <profile>
+      <id>sys-nexus-deploy-gpg</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <!--<phase>install</phase>-->
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>java-jdk-8</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+              <source>1.8</source>
+              <target>1.8</target>
+              <showDeprecation>true</showDeprecation>
+              <showWarnings>false</showWarnings>
+              <optimize>true</optimize>
+
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>java-jdk-9</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+              <source>1.9</source>
+              <target>1.9</target>
+              <showDeprecation>true</showDeprecation>
+              <showWarnings>true</showWarnings>
+              <testCompilerArgument>-Xlint</testCompilerArgument>
+              <generatedSourcesDirectory>${project.build.directory}/generatedsources/annotations</generatedSourcesDirectory>
+              <generatedTestSourcesDirectory>${project.build.directory}/generated-test-sources/test-annotations</generatedTestSourcesDirectory>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+
+    <profile>
+      <id>qm-qs-checkstyle</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <!-- Check style on build -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>validate</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+                <configuration>
+                  <!--<excludes>**/generated/**/*</excludes>-->
+                  <excludes>**/generated-sources/vwscdn/*</excludes>
+                  <excludes>com/vaadin/wscdn/*,in/virit/*,com/acme/**/*</excludes>
+                  <checkstyleRules>
+                    <module name="Checker">
+                      <!--<module name="JavadocPackage"/>-->
+                      <!--<module name="NewlineAtEndOfFile"/>-->
+                      <module name="FileTabCharacter"/>
+
+                      <module name="RegexpSingleline">
+                        <property name="format" value="\s+$"/>
+                        <property name="minimum" value="0"/>
+                        <property name="maximum" value="0"/>
+                        <property name="message" value="Line has trailing spaces."/>
+                      </module>
+
+                      <module name="TreeWalker">
+
+                        <!-- Checkstyle has a bug that disallows @return in annotation methods, enable only on demand -->
+                        <!--<module name="JavadocMethod"/>-->
+
+                        <!--<module name="JavadocType"/>-->
+                        <!--<module name="JavadocVariable"/>-->
+                        <!--<module name="JavadocStyle"/>-->
+
+                        <module name="TodoComment"/>
+
+                        <module name="ConstantName"/>
+                        <module name="LocalFinalVariableName"/>
+                        <module name="LocalVariableName"/>
+                        <module name="MemberName"/>
+                        <module name="MethodName"/>
+                        <module name="PackageName"/>
+                        <module name="ParameterName"/>
+                        <module name="StaticVariableName"/>
+                        <module name="TypeName"/>
+
+                        <module name="IllegalImport"/>
+                        <module name="RedundantImport"/>
+                        <module name="UnusedImports"/>
+
+                        <module name="EmptyForIteratorPad"/>
+                        <module name="GenericWhitespace"/>
+                        <module name="MethodParamPad"/>
+                        <module name="ParenPad"/>
+                        <module name="TypecastParenPad"/>
+                        <module name="WhitespaceAfter"/>
+                        <module name="WhitespaceAround">
+                          <!-- The RCURLY token has strange semantics where annotation arrays should have a spacing while normal
+                               arrays should not have such a spacing - therefore, we rather exclude it from automatic checks -->
+                          <property name="tokens"
+                                    value="ASSIGN,BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,EQUAL,GE,GT,LAND,LCURLY,LE,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,QUESTION,SL,SLIST,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN,TYPE_EXTENSION_AND"/>
+                        </module>
+                        <!--<module name="NoWhitespaceAfter"/>-->
+                        <!--<module name="NoWhitespaceBefore"/>-->
+
+                        <module name="ModifierOrder"/>
+
+                        <module name="LeftCurly"/>
+                        <module name="RightCurly"/>
+
+                        <module name="EmptyStatement"/>
+                        <module name="EqualsHashCode"/>
+                        <module name="IllegalInstantiation"/>
+                        <module name="MissingSwitchDefault"/>
+                        <!--<module name="RedundantThrows"/>-->
+                        <module name="SimplifyBooleanExpression"/>
+                        <module name="SimplifyBooleanReturn"/>
+
+                        <module name="HideUtilityClassConstructor"/>
+                        <module name="InterfaceIsType"/>
+
+                        <module name="ArrayTypeStyle"/>
+                        <module name="UpperEll"/>
+                      </module>
+                    </module>
+
+                  </checkstyleRules>
+                  <consoleOutput>true</consoleOutput>
+                  <failsOnError>true</failsOnError>
+                  <encoding>UTF-8</encoding>
+                  <outputFileFormat>plain</outputFileFormat>
+                  <outputFileFormat>xml</outputFileFormat>
+                </configuration>
+
+              </execution>
+            </executions>
+
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>qm-qs-sonar-rapidpm</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <!-- Optional URL to server. Default value is http://localhost:9000 -->
+        <!--<sonar.host.url>http://10.64.54.70:9000/</sonar.host.url>-->
+        <sonar.host.url>https://sonar.rapidpm.org/</sonar.host.url>
+        <sonar.jacoco.reportMissing.force.zero>true</sonar.jacoco.reportMissing.force.zero>
+        <sonar.pitest.mode>reuseReport</sonar.pitest.mode>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>qm-qs-version-check</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>versions-maven-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>qm-qs-jdeps</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jdeps-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>jdkinternals</goal> <!-- verify main classes -->
+                  <goal>test-jdkinternals</goal> <!-- verify test classes -->
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>qm-qs-requirements-develop</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-enforcer-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>enforce-maven</id>
+                <goals>
+                  <goal>enforce</goal>
+                </goals>
+                <configuration>
+                  <rules>
+                    <requireActiveProfile>
+                      <profiles>gen-javadoc,java-jdk-8,qm-qs-checkstyle,qm-qs-findbugs,qm-qs-jacoco,qm-qs-jacoco-junit,qm-qs-jdeps,qm-qs-pitest</profiles>
+                    </requireActiveProfile>
+                    <dependencyConvergence/>
+                    <!--<reactorModuleConvergence>-->
+                    <requireMavenVersion>
+                      <version>[3.3.3,)</version>
+                    </requireMavenVersion>
+                    <requireJavaVersion>
+                      <version>[1.8.0,)</version>
+                    </requireJavaVersion>
+                    <requireUpperBoundDeps>
+                      <!-- 'uniqueVersions' (default:false) can be set to true if you want to compare the timestamped SNAPSHOTs  -->
+                      <uniqueVersions>true</uniqueVersions>
+                    </requireUpperBoundDeps>
+
+                  </rules>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>qm-qs-requirements-release</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-enforcer-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>enforce-no-snapshots</id>
+                <goals>
+                  <goal>enforce</goal>
+                </goals>
+              </execution>
+
+            </executions>
+            <configuration>
+              <rules>
+                <requireActiveProfile>
+                  <profiles>
+                    qm-qs-jacoco,qm-qs-jacoco-junit,qm-qs-checkstyle,gen-javadoc,java-jdk-8,sys-nexus-deploy-gpg,qm-qs-add-git-commit-properties
+                  </profiles>
+                </requireActiveProfile>
+                <requireJavaVersion>
+                  <version>1.8.0</version>
+                </requireJavaVersion>
+                <requireMavenVersion>
+                  <version>[3.3.3,)</version>
+                </requireMavenVersion>
+                <requireReleaseDeps>
+                  <message>No Snapshots Allowed!</message>
+                </requireReleaseDeps>
+                <requireReleaseVersion>
+                  <message>No Snapshots Allowed!</message>
+                </requireReleaseVersion>
+                <requireUpperBoundDeps>
+                  <!-- 'uniqueVersions' (default:false) can be set to true if you want to compare the timestamped SNAPSHOTs  -->
+                  <!-- <uniqueVersions>true</uniqueVersions> -->
+                </requireUpperBoundDeps>
+              </rules>
+              <fail>true</fail>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+
+    <profile>
+      <id>repo-allow-snapshots</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>snapshots-repo</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+    <profile>
+      <id>repo-allow-jboss</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>jboss-repo</id>
+          <url>https://repository.jboss.org/nexus/content/groups/public</url>
+          <!--<url>http://maven.vaadin.com/</url>-->
+        </repository>
+      </repositories>
+    </profile>
+    <profile>
+      <id>qm-qs-add-git-commit-properties</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>pl.project13.maven</groupId>
+            <artifactId>git-commit-id-plugin</artifactId>
+            <version>2.2.1</version>
+            <executions>
+              <execution>
+                <id>get-the-git-infos</id>
+                <goals>
+                  <goal>revision</goal>
+                </goals>
+              </execution>
+            </executions>
+
+            <configuration>
+              <!--
+                  If you'd like to tell the plugin where your .git directory is,
+                  use this setting, otherwise we'll perform a search trying to
+                  figure out the right directory. It's better to add it explicitly IMHO.
+              -->
+              <!-- dotGitDirectory>${project.basedir}/.git</dotGitDirectory -->
+
+              <!-- that's the default value, you don't have to set it -->
+              <prefix>git</prefix>
+
+              <!-- that's the default value -->
+              <dateFormat>dd.MM.yyyy '@' HH:mm:ss z</dateFormat>
+
+              <!-- @since 2.2.0 -->
+              <!--
+                   If you want to set the timezone of the dateformat to anything in particular you can do this by using this option.
+                   As a general warning try to avoid three-letter time zone IDs because the same abbreviation are often used for multiple time zones.
+                   The default value we'll use the timezone use the timezone that's shipped with java (java.util.TimeZone.getDefault().getID()).
+                   *Note*: If you plan to set the java's timezone by using `MAVEN_OPTS=-Duser.timezone=UTC mvn clean package`, `mvn clean package -Duser.timezone=UTC` or any other configuration keep in mind that this option will override those settings and will not take other configurations into account!
+              -->
+              <dateFormatTimeZone>${user.timezone}</dateFormatTimeZone>
+
+              <!-- false is default here, it prints some more information during the build -->
+              <verbose>false</verbose>
+
+              <!-- ALTERNATE SETUP - GENERATE FILE -->
+              <!--
+                  If you want to keep git information, even in your WAR file etc,
+                  use this mode, which will generate a properties file (with filled out values)
+                  which you can then normally read using new Properties().load(/**/)
+              -->
+
+              <!-- this is false by default, forces the plugin to generate the git.properties file -->
+              <generateGitPropertiesFile>true</generateGitPropertiesFile>
+
+              <!--
+                  The path for the to be generated properties file, it's relative to ${project.basedir}
+                  The default value is ${project.build.outputDirectory}/git.properties
+
+                  *Note*: If you plan to set the generateGitPropertiesFilename-Path to a location where usally the source-files
+                          comes from (e.g. src/main/resources) and experience that your IDE (e.g. eclipse)
+                          invokes "Maven Project Builder" once every second, the chances that you are using
+                          an IDE where the src-folder is a watched folder for files that are *only* edited by humans is pretty high.
+                          For further information refer to the manual for your specifc IDE and check the worflow of "incremental project builders".
+                          In order to fix this problem we recommend to set the generateGitPropertiesFilename-Path
+                          to a target folder (e.g. ${project.build.outputDirectory}) since this is
+                          the place where all derived/generated resources should go.
+              -->
+              <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties
+              </generateGitPropertiesFilename>
+
+              <!-- Denotes the format to save properties in. Valid options are "properties" (default) and "json". Properties will be saved to the generateGitPropertiesFilename if generateGitPropertiesFile is set to `true`. -->
+              <format>properties</format>
+
+              <!--
+                  this is true by default; You may want to set this to false, if the plugin should run inside a
+                  <packaging>pom</packaging> project. Most projects won't need to override this property.
+
+                  For an use-case for this kind of behaviour see: https://github.com/ktoso/maven-git-commit-id-plugin/issues/21
+              -->
+              <skipPoms>false</skipPoms>
+
+              <!-- @since 2.1.4 -->
+              <!--
+                  Tell maven-git-commit-id to inject the git properties into all reactor projects not just the current one.
+                  For details about why you might want to skip this, read this issue: https://github.com/ktoso/maven-git-commit-id-plugin/pull/65
+                  The property is set to ``false`` by default to prevent the overriding of properties that may be unrelated to the project.
+              -->
+              <injectAllReactorProjects>false</injectAllReactorProjects>
+
+              <!-- @since 2.0.4 -->
+              <!-- true by default, controls whether the plugin will fail when no .git directory is found, when set to false the plugin will just skip execution -->
+              <failOnNoGitDirectory>true</failOnNoGitDirectory>
+
+              <!-- @since 2.1.5 -->
+              <!-- true by default, controls whether the plugin will fail if it was unable to obtain enough data for a complete run, if you don't care about this, you may want to set this value to false. -->
+              <failOnUnableToExtractRepoInfo>true</failOnUnableToExtractRepoInfo>
+
+              <!-- @since 2.1.8 -->
+              <!--
+                  skip the plugin execution completely. This is useful for e.g. profile activated plugin invocations or
+                  to use properties to enable / disable pom features. Default value is 'false'.
+              -->
+              <skip>false</skip>
+
+              <!-- @since 2.1.12 -->
+              <!--
+                 Use with caution!
+
+                 In a multi-module build, only run once. This means that the plugins effects will only execute once, for the parent project.
+                 This probably won't "do the right thing" if your project has more than one git repository.
+
+                 Important: If you're using `generateGitPropertiesFile`, setting `runOnlyOnce` will make the plugin
+                 only generate the file in the directory where you started your build (!).
+
+                 The `git.*` maven properties are available in all modules.
+                 Default value is `false`.
+              -->
+              <runOnlyOnce>false</runOnlyOnce>
+
+              <!-- @since 2.1.9 -->
+              <!--
+                  Can be used to exclude certain properties from being emitted into the resulting file.
+                  May be useful when you want to hide {@code git.remote.origin.url} (maybe because it contains your repo password?),
+                  or the email of the committer etc.
+
+                  Each value may be globbing, that is, you can write {@code git.commit.user.*} to exclude both, the {@code name},
+                  as well as {@code email} properties from being emitted into the resulting files.
+
+                  Please note that the strings here are Java regexes ({@code .*} is globbing, not plain {@code *}).
+              -->
+              <excludeProperties>
+                <!-- <excludeProperty>git.user.*</excludeProperty> -->
+              </excludeProperties>
+
+              <!-- @since 2.1.14 -->
+              <!--
+                  Can be used to include only certain properties into the resulting file.
+                  Will be overruled by the exclude properties.
+
+                  Each value may be globbing, that is, you can write {@code git.commit.user.*} to include both, the {@code name},
+                  as well as {@code email} properties into the resulting files.
+
+                  Please note that the strings here are Java regexes ({@code .*} is globbing, not plain {@code *}).
+              -->
+              <includeOnlyProperties>
+                <!-- <includeOnlyProperty>^git.commit.id.full$</includeOnlyProperty> -->
+              </includeOnlyProperties>
+
+              <!-- @since 2.1.10 -->
+              <!--
+                false is default here, if set to true it uses native `git` executable for extracting all data.
+                This usually has better performance than the default (jgit) implementation, but requires you to
+                have git available as executable for the build as well as *might break unexpectedly* when you
+                upgrade your system-wide git installation.
+
+                As rule of thumb - stay on `jgit` (keep this `false`) until you notice performance problems.
+              -->
+              <useNativeGit>false</useNativeGit>
+
+              <!-- @since v2.0.4 -->
+              <!--
+                   Controls the length of the abbreviated git commit it (git.commit.id.abbrev)
+
+                   Defaults to `7`.
+                   `0` carries the special meaning.
+                   Maximum value is `40`, because of max SHA-1 length.
+               -->
+              <abbrevLength>7</abbrevLength>
+
+
+              <!-- @since v2.2.0 -->
+              <!--
+                   The option can be used to tell the plugin how it should generate the 'git.commit.id' property. Due to some naming issues when exporting the properties as an json-object (https://github.com/ktoso/maven-git-commit-id-plugin/issues/122) we needed to make it possible to export all properties as a valid json-object.
+                   Due to the fact that this is one of the major properties the plugin is exporting we just don't want to change the exporting mechanism and somehow throw the backwards compatibility away.
+                   We rather provide a convenient switch where you can choose if you would like the properties as they always had been, or if you rather need to support full json-object compatibility.
+                   In the case you need to fully support json-object we unfortunately need to change the 'git.commit.id' property from 'git.commit.id' to 'git.commit.id.full' in the exporting mechanism to allow the generation of a fully valid json object.
+
+                   Currently the switch allows two different options:
+                   1. By default this property is set to 'flat' and will generate the formerly known property 'git.commit.id' as it was in the previous versions of the plugin. Keeping it to 'flat' by default preserve backwards compatibility and does not require further adjustments by the end user.
+                   2. If you set this switch to 'full' the plugin will export the formerly known property 'git.commit.id' as 'git.commit.id.full' and therefore will generate a fully valid json object in the exporting mechanism.
+
+                   *Note*: Depending on your plugin configuration you obviously can choose the 'prefix' of your properties by setting it accordingly in the plugin's configuration. As a result this is therefore only an illustration what the switch means when the 'prefix' is set to it's default value.
+                   *Note*: If you set the value to something that's not equal to 'flat' or 'full' (ignoring the case) the plugin will output a warning and will fallback to the default 'flat' mode.
+              -->
+              <commitIdGenerationMode>flat</commitIdGenerationMode>
+
+              <!-- @since 2.1.0 -->
+              <!--
+                  read up about git-describe on the in man, or it's homepage - it's a really powerful versioning helper
+                  and the recommended way to use git-commit-id-plugin. The configuration bellow is optional,
+                  by default describe will run "just like git-describe on the command line", even though it's a JGit reimplementation.
+              -->
+              <gitDescribe>
+
+                <!-- don't generate the describe property -->
+                <skip>false</skip>
+
+                <!--
+                    if no tag was found "near" this commit, just print the commit's id instead,
+                    helpful when you always expect this field to be not-empty
+                -->
+                <always>false</always>
+                <!--
+                     how many chars should be displayed as the commit object id?
+                     7 is git's default,
+                     0 has a special meaning (see end of this README.md),
+                     and 40 is the maximum value here
+                -->
+                <abbrev>7</abbrev>
+
+                <!-- when the build is triggered while the repo is in "dirty state", append this suffix -->
+                <dirty>-dirty</dirty>
+
+                <!-- Only consider tags matching the given pattern. This can be used to avoid leaking private tags from the repository. -->
+                <match>*</match>
+
+                <!--
+                     always print using the "tag-commits_from_tag-g_commit_id-maybe_dirty" format, even if "on" a tag.
+                     The distance will always be 0 if you're "on" the tag.
+                -->
+                <forceLongFormat>false</forceLongFormat>
+              </gitDescribe>
+            </configuration>
+
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+
+</project>
