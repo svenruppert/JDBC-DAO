@@ -20,7 +20,6 @@
 package junit.org.rapidpm.microservice.persistence.jdbc.dao.v001;
 
 
-import junit.org.rapidpm.microservice.persistence.jdbc.dao.v001.UserDAO.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.rapidpm.microservice.persistence.jdbc.JDBCConnectionPool;
