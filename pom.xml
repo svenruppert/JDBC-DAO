@@ -95,13 +95,13 @@
     <!--project versions-->
     <dependencies>
       <dependency>
-        <groupId>org.rapidpm</groupId>
-        <artifactId>jdbc-dao-jdbcpool</artifactId>
+        <groupId>org.rapidpm.jdbcdao</groupId>
+        <artifactId>jdbcpool</artifactId>
         <version>1.0.0-SNAPSHOT</version>
       </dependency>
       <dependency>
-        <groupId>org.rapidpm</groupId>
-        <artifactId>jdbc-dao-jdbcpool</artifactId>
+        <groupId>org.rapidpm.jdbcdao</groupId>
+        <artifactId>jdbcpool</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <type>test-jar</type>
         <scope>test</scope>
@@ -109,7 +109,7 @@
       <dependency>
         <groupId>com.zaxxer</groupId>
         <artifactId>HikariCP</artifactId>
-        <version>2.4.7</version>
+        <version>2.5.1</version>
         <scope>compile</scope>
       </dependency>
       <!--tdd-->
@@ -269,11 +269,6 @@
           <groupId>org.pitest</groupId>
           <artifactId>pitest-maven</artifactId>
           <version>1.1.10</version>
-        </plugin>
-        <plugin>
-          <groupId>org.sonarsource.scanner.maven</groupId>
-          <artifactId>sonar-maven-plugin</artifactId>
-          <version>3.0.2</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -850,28 +845,6 @@
     </profile>
 
     <profile>
-      <id>qm-qs-sonar-rapidpm</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <properties>
-        <!-- Optional URL to server. Default value is http://localhost:9000 -->
-        <!--<sonar.host.url>http://10.64.54.70:9000/</sonar.host.url>-->
-        <sonar.host.url>https://sonar.rapidpm.org/</sonar.host.url>
-        <sonar.jacoco.reportMissing.force.zero>true</sonar.jacoco.reportMissing.force.zero>
-        <sonar.pitest.mode>reuseReport</sonar.pitest.mode>
-      </properties>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.sonarsource.scanner.maven</groupId>
-            <artifactId>sonar-maven-plugin</artifactId>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
-    <profile>
       <id>qm-qs-version-check</id>
       <activation>
         <activeByDefault>true</activeByDefault>
@@ -909,98 +882,6 @@
         </plugins>
       </build>
     </profile>
-    <profile>
-      <id>qm-qs-requirements-develop</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-enforcer-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>enforce-maven</id>
-                <goals>
-                  <goal>enforce</goal>
-                </goals>
-                <configuration>
-                  <rules>
-                    <requireActiveProfile>
-                      <profiles>gen-javadoc,java-jdk-8,qm-qs-checkstyle,qm-qs-findbugs,qm-qs-jacoco,qm-qs-jacoco-junit,qm-qs-jdeps,qm-qs-pitest</profiles>
-                    </requireActiveProfile>
-                    <dependencyConvergence/>
-                    <!--<reactorModuleConvergence>-->
-                    <requireMavenVersion>
-                      <version>[3.3.3,)</version>
-                    </requireMavenVersion>
-                    <requireJavaVersion>
-                      <version>[1.8.0,)</version>
-                    </requireJavaVersion>
-                    <requireUpperBoundDeps>
-                      <!-- 'uniqueVersions' (default:false) can be set to true if you want to compare the timestamped SNAPSHOTs  -->
-                      <uniqueVersions>true</uniqueVersions>
-                    </requireUpperBoundDeps>
-
-                  </rules>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>qm-qs-requirements-release</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-enforcer-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>enforce-no-snapshots</id>
-                <goals>
-                  <goal>enforce</goal>
-                </goals>
-              </execution>
-
-            </executions>
-            <configuration>
-              <rules>
-                <requireActiveProfile>
-                  <profiles>
-                    qm-qs-jacoco,qm-qs-jacoco-junit,qm-qs-checkstyle,gen-javadoc,java-jdk-8,sys-nexus-deploy-gpg,qm-qs-add-git-commit-properties
-                  </profiles>
-                </requireActiveProfile>
-                <requireJavaVersion>
-                  <version>1.8.0</version>
-                </requireJavaVersion>
-                <requireMavenVersion>
-                  <version>[3.3.3,)</version>
-                </requireMavenVersion>
-                <requireReleaseDeps>
-                  <message>No Snapshots Allowed!</message>
-                </requireReleaseDeps>
-                <requireReleaseVersion>
-                  <message>No Snapshots Allowed!</message>
-                </requireReleaseVersion>
-                <requireUpperBoundDeps>
-                  <!-- 'uniqueVersions' (default:false) can be set to true if you want to compare the timestamped SNAPSHOTs  -->
-                  <!-- <uniqueVersions>true</uniqueVersions> -->
-                </requireUpperBoundDeps>
-              </rules>
-              <fail>true</fail>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
 
     <profile>
       <id>repo-allow-snapshots</id>

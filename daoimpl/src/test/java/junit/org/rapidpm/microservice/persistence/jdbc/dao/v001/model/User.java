@@ -1,4 +1,4 @@
-package junit.org.rapidpm.microservice.persistence.jdbc.dao.v001;
+package junit.org.rapidpm.microservice.persistence.jdbc.dao.v001.model;
 
 import java.util.Objects;
 

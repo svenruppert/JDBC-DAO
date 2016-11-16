@@ -20,6 +20,9 @@
 package junit.org.rapidpm.microservice.persistence.jdbc.dao.v001;
 
 
+import junit.org.rapidpm.microservice.persistence.jdbc.dao.v001.dao.UserDAOAbstractImpl;
+import junit.org.rapidpm.microservice.persistence.jdbc.dao.v001.dao.UserDAOHSQL;
+import junit.org.rapidpm.microservice.persistence.jdbc.dao.v001.model.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.rapidpm.microservice.persistence.jdbc.JDBCConnectionPool;
@@ -33,7 +36,7 @@ public class UserDAOTest001 extends UserDAOBaseTest {
   public void test001() throws Exception {
     final Optional<JDBCConnectionPool> connectionPoolOptional = pools.getPool(poolname());
     final JDBCConnectionPool connectionPool = connectionPoolOptional.get();
-    final UserDAO userDAO = new UserDAO().workOnPool(connectionPool);
+    final UserDAOAbstractImpl userDAO = new UserDAOHSQL().workOnPool(connectionPool);
 
     final User user = new User(001, "jon", "doe", "jon.d@yahooo.com");
     userDAO.writeUser(user);

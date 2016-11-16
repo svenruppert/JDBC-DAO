@@ -14,12 +14,12 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.rapidpm</groupId>
-      <artifactId>jdbc-dao-jdbcpool</artifactId>
+      <groupId>org.rapidpm.jdbcdao</groupId>
+      <artifactId>jdbcpool</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.rapidpm</groupId>
-      <artifactId>jdbc-dao-jdbcpool</artifactId>
+      <groupId>org.rapidpm.jdbcdao</groupId>
+      <artifactId>jdbcpool</artifactId>
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
@@ -34,6 +34,7 @@
       <artifactId>hsqldb</artifactId>
       <scope>test</scope>
     </dependency>
+
   </dependencies>
 
 </project>

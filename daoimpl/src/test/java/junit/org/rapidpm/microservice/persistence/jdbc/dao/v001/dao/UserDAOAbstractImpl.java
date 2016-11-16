@@ -17,33 +17,23 @@
  * under the License.
  */
 
-package org.rapidpm.microservice.persistence.jdbc.dao;
+package junit.org.rapidpm.microservice.persistence.jdbc.dao.v001.dao;
 
-import com.zaxxer.hikari.HikariDataSource;
 import org.rapidpm.microservice.persistence.jdbc.JDBCConnectionPool;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 
-public interface Update extends BasicOperation {
+public abstract class UserDAOAbstractImpl implements UserDAO {
 
-  default int update(final JDBCConnectionPool connectionPool) {
-    final HikariDataSource dataSource = connectionPool.getDataSource();
-    try {
-      final Connection connection = dataSource.getConnection();
-      final int count;
-      try (final Statement statement = connection.createStatement()) {
-        final String sql = createSQL();
-        count = statement.executeUpdate(sql);
-        statement.close();
-      }
-      dataSource.evictConnection(connection);
-      return count;
-    } catch (final SQLException e) {
-      e.printStackTrace();
-    }
-    return -1;
+  private JDBCConnectionPool connectionPool;
+
+  public UserDAOAbstractImpl workOnPool(final JDBCConnectionPool connectionPool) {
+    this.connectionPool = connectionPool;
+    return this;
+  }
+
+  @Override
+  public JDBCConnectionPool connectionPool() {
+    return connectionPool;
   }
 
 }
