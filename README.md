@@ -8,7 +8,7 @@ This is not planned to be used for big projects...
 
 ## The short version
 
-![Overview](../JDBC-DAO/UserDAOHSQL.png)
+![Overview](./UserDAOHSQL.png)
 
 
 ## Example
