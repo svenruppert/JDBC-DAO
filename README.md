@@ -6,6 +6,11 @@ For this I extracted the few classes here to give a minimalistic base.
 
 This is not planned to be used for big projects...
 
+## The short version
+
+![Overview](../JDBC-DAO/UserDAOHSQL.png)
+
+
 ## Example
 
 For this example (you could find it in the src-test folder)
