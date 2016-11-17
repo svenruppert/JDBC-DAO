@@ -20,6 +20,7 @@
 package org.rapidpm.microservice.persistence.jdbc.dao;
 
 import org.jetbrains.annotations.NotNull;
+import org.rapidpm.microservice.persistence.jdbc.JDBCConnectionPool;
 
 public interface BasicOperation {
 

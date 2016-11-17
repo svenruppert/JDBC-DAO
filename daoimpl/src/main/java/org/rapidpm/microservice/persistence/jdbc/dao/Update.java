@@ -26,6 +26,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+@FunctionalInterface
 public interface Update extends BasicOperation {
 
   default int update(final JDBCConnectionPool connectionPool) {

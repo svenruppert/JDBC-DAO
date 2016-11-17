@@ -21,9 +21,7 @@ import java.util.Optional;
  *
  * Created by RapidPM - Team on 16.11.16.
  */
-public interface UserDAO {
-
-  JDBCConnectionPool connectionPool();
+public interface UserDAO extends DAO {
 
   default void writeUser(final User user) {
     ((Update) () -> createInsert(user)).update(connectionPool());

@@ -16,7 +16,7 @@ import junit.org.rapidpm.microservice.persistence.jdbc.dao.v001.model.User;
  *
  * Created by RapidPM - Team on 16.11.16.
  */
-public class UserDAOHSQL extends UserDAOAbstractImpl {
+public class UserDAOHSQL extends GenericDAO implements UserDAO {
 
   public String createInsert(final User user) {
     final String sql = "INSERT INTO CUSTOMER " +
@@ -41,8 +41,6 @@ public class UserDAOHSQL extends UserDAOAbstractImpl {
   public String getMailByCustomerID(int customerID) {
     return "SELECT EMAIL FROM CUSTOMER WHERE CUSTOMER_ID = " + customerID + "";
   }
-
-
 
 
 }
