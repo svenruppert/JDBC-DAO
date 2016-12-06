@@ -1,4 +1,4 @@
-package junit.org.rapidpm.microservice.persistence.jdbc.dao.v001.dao;
+package org.rapidpm.microservice.persistence.jdbc.dao;
 
 import org.rapidpm.microservice.persistence.jdbc.JDBCConnectionPool;
 

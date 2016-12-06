@@ -20,11 +20,11 @@
 package org.rapidpm.microservice.persistence.jdbc.dao;
 
 import org.jetbrains.annotations.NotNull;
-import org.rapidpm.microservice.persistence.jdbc.JDBCConnectionPool;
 
+@FunctionalInterface
 public interface BasicOperation {
-
   @NotNull
   String createSQL();
-
 }
+
+

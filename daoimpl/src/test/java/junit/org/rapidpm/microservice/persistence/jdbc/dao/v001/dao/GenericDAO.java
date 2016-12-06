@@ -1,6 +1,7 @@
 package junit.org.rapidpm.microservice.persistence.jdbc.dao.v001.dao;
 
 import org.rapidpm.microservice.persistence.jdbc.JDBCConnectionPool;
+import org.rapidpm.microservice.persistence.jdbc.dao.DAO;
 
 /**
  * Copyright (C) 2010 RapidPM
@@ -20,7 +21,6 @@ public abstract class GenericDAO implements DAO {
 
   private JDBCConnectionPool connectionPool;
 
-//  public <T extends DAO> T workOnPool(final JDBCConnectionPool connectionPool) {
   public DAO workOnPool(final JDBCConnectionPool connectionPool) {
     this.connectionPool = connectionPool;
     return this;
@@ -30,6 +30,6 @@ public abstract class GenericDAO implements DAO {
   public JDBCConnectionPool connectionPool() {
     return connectionPool;
   }
-
-
 }
+
+

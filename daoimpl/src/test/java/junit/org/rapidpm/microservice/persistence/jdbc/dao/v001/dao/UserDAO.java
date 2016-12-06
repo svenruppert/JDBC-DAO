@@ -1,7 +1,7 @@
 package junit.org.rapidpm.microservice.persistence.jdbc.dao.v001.dao;
 
 import junit.org.rapidpm.microservice.persistence.jdbc.dao.v001.model.User;
-import org.rapidpm.microservice.persistence.jdbc.JDBCConnectionPool;
+import org.rapidpm.microservice.persistence.jdbc.dao.DAO;
 import org.rapidpm.microservice.persistence.jdbc.dao.QueryOneTypedValue;
 import org.rapidpm.microservice.persistence.jdbc.dao.Update;
 
@@ -41,5 +41,5 @@ public interface UserDAO extends DAO {
 
   String getMailByCustomerID(int customerID);
 
-
 }
+
