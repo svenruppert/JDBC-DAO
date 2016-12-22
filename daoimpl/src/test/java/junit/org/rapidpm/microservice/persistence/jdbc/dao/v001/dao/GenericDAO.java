@@ -21,9 +21,9 @@ public abstract class GenericDAO implements DAO {
 
   private JDBCConnectionPool connectionPool;
 
-  public DAO workOnPool(final JDBCConnectionPool connectionPool) {
+  public <T extends DAO> T workOnPool(final JDBCConnectionPool connectionPool) {
     this.connectionPool = connectionPool;
-    return this;
+    return (T) this;
   }
 
   @Override

@@ -19,7 +19,6 @@
 
 package junit.org.rapidpm.microservice.persistence.jdbc.dao.v001;
 
-import junit.org.rapidpm.microservice.persistence.jdbc.dao.v001.dao.UserDAOAbstractImpl;
 import junit.org.rapidpm.microservice.persistence.jdbc.dao.v001.dao.UserDAOHSQL;
 import junit.org.rapidpm.microservice.persistence.jdbc.dao.v001.model.User;
 import org.junit.Assert;
@@ -35,7 +34,7 @@ public class UserDAOTest002 extends UserDAOBaseTest {
     final Optional<JDBCConnectionPool> connectionPoolOptional = pools.getPool(poolname());
     final JDBCConnectionPool connectionPool = connectionPoolOptional.get();
 
-    final UserDAOAbstractImpl userDAO = new UserDAOHSQL()
+    final UserDAOHSQL userDAO = new UserDAOHSQL()
         .workOnPool(connectionPool);
 
     final Optional<User> user = userDAO.readUser(1001);

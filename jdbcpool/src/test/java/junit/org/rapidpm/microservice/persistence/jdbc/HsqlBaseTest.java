@@ -35,10 +35,6 @@ import java.util.stream.Collectors;
 public abstract class HsqlBaseTest {
 
   private final String[] scripts = createSQLInitScriptArray();
-  // add here other *basic* scripts that should be executed
-//  private final String[] scripts = {
-//      "CLEAR_SCHEMA.sql", "CREATE_TABLE_EXAMPLE.sql"
-//  };
   protected JDBCConnectionPools pools = new JDBCConnectionPools();
 
   public abstract String[] createSQLInitScriptArray();
@@ -46,12 +42,6 @@ public abstract class HsqlBaseTest {
 
   //TODO could be more dynamic
   public void initSchema(final String poolname) throws Exception {
-
-//    DI.clearReflectionModel();
-//    DI.activatePackages("org.rapidpm");
-//    activateDI4Packages();
-//    DI.activatePackages(this.getClass());
-//    DI.activateDI(this);
 
     for (final String script : scripts) {
       final Class<? extends HsqlBaseTest> aClass = baseTestClass();

@@ -75,10 +75,9 @@
 
   <properties>
     <jmh.version>1.12</jmh.version>
-    <kotlin.version>1.0.3</kotlin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!--<jacoco.version>0.7.5.201505241946</jacoco.version>-->
-    <jacoco.version>0.7.6.201602180812</jacoco.version>
+    <jacoco.version>0.7.8</jacoco.version>
     <slf4j.version>1.7.21</slf4j.version>
   </properties>
 
@@ -285,6 +284,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
+        <version>3.0.2</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -298,6 +298,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
+        <version>3.0.1</version>
         <executions>
           <execution>
             <goals>
@@ -311,6 +312,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
+        <version>3.0.2</version>
         <configuration>
           <encoding>UTF-8</encoding>
         </configuration>
@@ -319,11 +321,13 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-repository-plugin</artifactId>
+        <version>2.4</version>
       </plugin>
 
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
+        <version>1.12</version>
         <executions>
           <execution>
             <id>add sources</id>
@@ -334,9 +338,7 @@
             <configuration>
               <sources>
                 <source>${project.build.directory}/generated-sources/annotations</source>
-                <source>src/main/scala</source>
                 <source>src/main/java</source>
-                <source>src/main/kotlin</source>
               </sources>
             </configuration>
           </execution>
@@ -351,9 +353,7 @@
             <configuration>
               <sources>
                 <source>${project.build.directory}/generated-sources/annotations</source>
-                <source>src/main/scala</source>
                 <source>src/main/java</source>
-                <source>src/main/kotlin</source>
               </sources>
             </configuration>
           </execution>
@@ -366,9 +366,7 @@
             <configuration>
               <sources>
                 <source>${project.build.directory}/generated-test-sources/test-annotations</source>
-                <source>src/test/scala</source>
                 <source>src/test/java</source>
-                <source>src/test/kotlin</source>
               </sources>
             </configuration>
           </execution>
@@ -391,6 +389,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.10.4</version>
             <executions>
               <execution>
                 <id>attach-javadocs</id>
@@ -407,37 +406,6 @@
       </build>
     </profile>
     <profile>
-      <id>qm-qs-findbugs</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <reporting>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>findbugs-maven-plugin</artifactId>
-            <configuration>
-              <onlyAnalyze>org.rapidpm.*</onlyAnalyze>
-              <!--
-                  Enables analysis which takes more memory but finds more bugs.
-                  If you run out of memory, changes the value of the effort element
-                  to 'low'.
-              -->
-              <effort>Max</effort>
-              <!-- Reports all bugs (other values are medium and max) -->
-              <threshold>Low</threshold>
-              <!-- Produces XML report -->
-              <xmlOutput>true</xmlOutput>
-              <!-- Configures the directory in which the XML report is created -->
-              <findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
-              <!--<visitors>FindDeadLocalStores,UnreadFields</visitors>-->
-            </configuration>
-          </plugin>
-        </plugins>
-      </reporting>
-
-    </profile>
-    <profile>
       <id>qm-qs-pitest</id>
       <activation>
         <activeByDefault>true</activeByDefault>
@@ -448,6 +416,7 @@
           <plugin>
             <groupId>org.pitest</groupId>
             <artifactId>pitest-maven</artifactId>
+            <version>1.1.11</version>
             <configuration>
               <outputFormats>
                 <outputFormat>XML</outputFormat>
@@ -469,6 +438,7 @@
           <plugin>
             <groupId>org.pitest</groupId>
             <artifactId>pitest-maven</artifactId>
+            <version>1.1.11</version>
             <reportSets>
               <reportSet>
                 <reports>
@@ -493,6 +463,7 @@
           <groupId>org.jacoco</groupId>
           <artifactId>org.jacoco.agent</artifactId>
           <classifier>runtime</classifier>
+          <version>0.7.8</version>
           <scope>test</scope>
         </dependency>
       </dependencies>
@@ -501,6 +472,7 @@
           <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.7.8</version>
             <configuration>
               <includes>
                 <include>**/org/rapidpm/**/*</include>
@@ -583,6 +555,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.19.1</version>
             <inherited>true</inherited>
             <configuration>
               <includes>
@@ -616,6 +589,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.19.1</version>
             <inherited>true</inherited>
             <configuration>
               <systemPropertyVariables>
@@ -670,6 +644,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
@@ -695,6 +670,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.6.0</version>
             <configuration>
               <source>1.8</source>
               <target>1.8</target>
@@ -717,6 +693,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.6.0</version>
             <configuration>
               <source>1.9</source>
               <target>1.9</target>
@@ -743,6 +720,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-checkstyle-plugin</artifactId>
+            <version>2.17</version>
             <executions>
               <execution>
                 <id>validate</id>
@@ -854,6 +832,7 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>versions-maven-plugin</artifactId>
+            <version>2.3</version>
           </plugin>
         </plugins>
       </build>
@@ -868,6 +847,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-jdeps-plugin</artifactId>
+            <version>3.0.0</version>
             <executions>
               <execution>
                 <goals>
