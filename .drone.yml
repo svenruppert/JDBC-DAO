@@ -1,7 +1,7 @@
 
 pipeline:
   build:
-    image: 3.5-jdk-8
+    image: maven:3.5-jdk-8
     pull: true
     commands:
       - mvn clean
