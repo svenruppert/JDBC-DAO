@@ -4,10 +4,7 @@ pipeline:
     image: maven:3.5-jdk-8
     pull: true
 #    ADD: ./_data/nexus/settings.xml:/root/.m2/settings.xml
-    entrypoint: /bin/sh
     commands:
-      - -c
-      - |
       - cp /drone/src/192.168.0.228/sven/JDBC-DAO/_data/nexus/settings.xml /root/.m2/settings.xml
       - mvn clean
       - mvn install
