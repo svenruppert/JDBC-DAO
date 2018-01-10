@@ -5,6 +5,7 @@ pipeline:
     pull: true
 #    ADD: ./_data/nexus/settings.xml:/root/.m2/settings.xml
     commands:
+      - mkdir /root/.m2
       - cp /drone/src/192.168.0.228/sven/JDBC-DAO/_data/nexus/settings.xml /root/.m2/settings.xml
       - mvn clean
       - mvn install
