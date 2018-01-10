@@ -6,4 +6,7 @@ pipeline:
     ADD: ./_data/nexus/settings.xml:/root/.m2/settings.xml
     commands:
       - mvn clean
+      - -c
+      - |
+      - cp /drone/src/gogs/sven/jdbc-dao/_data/nexus/settings.xml /root/.m2/settings.xml
       - mvn install
