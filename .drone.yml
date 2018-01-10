@@ -8,5 +8,5 @@ pipeline:
       - mvn clean
       - -c
       - |
-      - cp /drone/src/gogs/sven/jdbc-dao/_data/nexus/settings.xml /root/.m2/settings.xml
+      - cp /drone/src/192.168.0.228/sven/JDBC-DAO/_data/nexus/settings.xml /root/.m2/settings.xml
       - mvn install
