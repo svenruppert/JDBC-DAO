@@ -3,7 +3,7 @@ pipeline:
   build:
     image: maven:3.5-jdk-8
     pull: true
-    ADD: ./_data/nexus/settings.xml:/root/.m2/settings.xml
+#    ADD: ./_data/nexus/settings.xml:/root/.m2/settings.xml
     commands:
       - mvn clean
       - -c
